@@ -40,10 +40,11 @@ class CurrencyController extends AbstractController {
 
         if ($converterForm->isSubmitted() && $converterForm->isValid()) {
             $formData = $converterForm->all();
-            $value = $formData['value']->getData();
+            $amount = $formData['value']->getData();
             $from = $formData['from']->getData()->getData();
             $to = $formData['to']->getData()->getData();
-            $result = ($to->value / $from->value) * $value;
+
+            $result = $currenciesData->convert(from: $from->value, to: $to->value, amount: $amount);
         }
 
         return $this->render('currency/index.html.twig', [

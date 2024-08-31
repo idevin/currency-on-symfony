@@ -138,4 +138,8 @@ class CurrenciesData {
 
         return $content;
     }
+
+    public function convert($from, $to, mixed $amount): float|int {
+        return ($to->value / $from->value) * $amount;
+    }
 }

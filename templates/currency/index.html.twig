@@ -5,6 +5,10 @@
 {% block body %}
     <h1>Converter</h1>
 
+    {% if result %}
+    <h4>Result: {{ result }}</h4>
+    {% endif %}
+
     {{ form_start(converterForm) }}
     {{ form_widget(converterForm) }}
     <button class="btn">{{ button_label|default('Convert') }}</button>
