@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Currency index{% endblock %}
+
+{% block body %}
+    <h1>Converter</h1>
+
+    {{ form_start(converterForm) }}
+    {{ form_widget(converterForm) }}
+    <button class="btn">{{ button_label|default('Convert') }}</button>
+    {{ form_end(converterForm) }}
+
+    <h1>Currency index</h1>
+
+    <table class="table" style="width: 100%;">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Value (USD)</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for currency in currencies %}
+            <tr>
+                <td style="text-align: center;">
+                    {{ currency.id }}
+                </td>
+                <td style="text-align: center;">
+                    {{ currency.symbol }} ({{ currency.data.symbol_native }})
+                </td>
+                <td style="text-align: center;">
+                    {{ currency.data.name }}
+                </td>
+                <td style="text-align: center;">
+                    {{ currency.data.value }}
+                </td>
+                <td style="text-align: center;">
+                    <a href="{{ path('app_currency_show', {'id': currency.id}) }}">show</a>
+                    <a href="{{ path('app_currency_edit', {'id': currency.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_currency_new') }}">Create new</a>
+{% endblock %}

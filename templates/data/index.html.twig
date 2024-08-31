@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Data index{% endblock %}
+
+{% block body %}
+    <h1>Data index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Symbol_native</th>
+                <th>Decimal_digits</th>
+                <th>Rounding</th>
+                <th>Code</th>
+                <th>Name_plural</th>
+                <th>Type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in data %}
+            <tr>
+                <td>{{ data.id }}</td>
+                <td>{{ data.symbol }}</td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.symbolNative }}</td>
+                <td>{{ data.decimalDigits }}</td>
+                <td>{{ data.rounding }}</td>
+                <td>{{ data.code }}</td>
+                <td>{{ data.namePlural }}</td>
+                <td>{{ data.type }}</td>
+                <td>
+                    <a href="{{ path('app_data_show', {'id': data.id}) }}">show</a>
+                    <a href="{{ path('app_data_edit', {'id': data.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_data_new') }}">Create new</a>
+{% endblock %}
